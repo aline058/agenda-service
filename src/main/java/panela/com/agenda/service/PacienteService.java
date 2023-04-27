@@ -12,7 +12,6 @@ import panela.com.agenda.entity.Paciente;
 import panela.com.agenda.repository.PacienteRepository;
 
 @Service
-@Transactional
 public class PacienteService {
 	
 	
