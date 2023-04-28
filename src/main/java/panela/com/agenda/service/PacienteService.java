@@ -2,13 +2,13 @@ package panela.com.agenda.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import panela.com.agenda.entity.Paciente;
+import panela.com.agenda.exception.PacienteJaCadastrado;
 import panela.com.agenda.repository.PacienteRepository;
 
 @Service
@@ -22,6 +22,10 @@ public class PacienteService {
 	}
 	
 	public Paciente salvar(Paciente paciente) {
+		if(pr.existsDistinctPeopleByCpfOrEmail(paciente.getCpf(), paciente.getEmail())) {
+			throw new PacienteJaCadastrado("Paciente já cadastrado!");
+		}
+		
 		return pr.save(paciente);
 	}
 	
