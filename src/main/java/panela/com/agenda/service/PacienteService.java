@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import panela.com.agenda.entity.Paciente;
 import panela.com.agenda.exception.PacienteJaCadastrado;
+import panela.com.agenda.exception.PacienteNaoEncontrado;
 import panela.com.agenda.repository.PacienteRepository;
 
 @Service
@@ -35,6 +36,13 @@ public class PacienteService {
 	
 	public Optional<Paciente> exibir(Long id) {
 		return pr.findById(id);
+	}
+	
+	public Paciente alterar(Paciente paciente) {
+		if(!pr.existsById(paciente.getId())||!pr.existsByCpf(paciente.getCpf())) {
+			throw new PacienteNaoEncontrado("Paciente não encontrado");
+		}
+		return pr.save(paciente);
 	}
 	
 	public void apagar(Long id) {
