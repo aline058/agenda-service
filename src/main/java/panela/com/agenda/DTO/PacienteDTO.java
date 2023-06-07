@@ -1,10 +1,19 @@
 package panela.com.agenda.DTO;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 public class PacienteDTO {
 		
+	@NotBlank(message = "nome obrigatorio")
 	String nome;
+	@NotBlank(message = "sobrenome obrigatorio")
 	String sobrenome;
+	@Email(message = "email invalido")
 	String email;
+	@CPF(message = "cpf invalido")
 	String cpf;
 	
 	public String getNome() {
@@ -32,14 +41,13 @@ public class PacienteDTO {
 		this.cpf = cpf;
 	}
 	public PacienteDTO(String nome, String sobrenome, String email, String cpf) {
-		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
 		this.cpf = cpf;
 	}
 	public PacienteDTO() {
-		super();
+		
 	}
 	
 	

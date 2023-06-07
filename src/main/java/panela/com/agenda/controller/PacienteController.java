@@ -3,6 +3,8 @@ package panela.com.agenda.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,7 @@ public class PacienteController {
 	
 	
 	@PostMapping
-	public ResponseEntity<PacienteDTO> salvar(@RequestBody PacienteDTO pacienteDTO){
+	public ResponseEntity<PacienteDTO> salvar(@Valid @RequestBody PacienteDTO pacienteDTO){
 		Paciente paciente = PacienteMapper.toPaciente(pacienteDTO);
 		Paciente pacienteSalvo = ps.salvar(paciente);
 		PacienteDTO pacienteDTOSalvo = PacienteMapper.toPacienteDTO(pacienteSalvo);
@@ -56,7 +58,7 @@ public class PacienteController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Paciente> editar(@RequestBody Paciente paciente){
+	public ResponseEntity<Paciente> editar(@Valid @RequestBody Paciente paciente){
 		Paciente pacienteEditado = ps.alterar(paciente);
 		return ResponseEntity.status(HttpStatus.OK).body(pacienteEditado);
 	}
