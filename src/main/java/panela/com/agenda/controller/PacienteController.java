@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import panela.com.agenda.DTO.PacienteDTO;
+import panela.com.agenda.DTO.PacienteMapper;
 import panela.com.agenda.entity.Paciente;
 import panela.com.agenda.service.PacienteService;
 
@@ -30,24 +32,27 @@ public class PacienteController {
 	
 	
 	@PostMapping
-	public ResponseEntity<Paciente> salvar(@RequestBody Paciente paciente){
+	public ResponseEntity<PacienteDTO> salvar(@RequestBody PacienteDTO pacienteDTO){
+		Paciente paciente = PacienteMapper.toPaciente(pacienteDTO);
 		Paciente pacienteSalvo = ps.salvar(paciente);
-		return ResponseEntity.status(HttpStatus.CREATED).body(pacienteSalvo);
+		PacienteDTO pacienteDTOSalvo = PacienteMapper.toPacienteDTO(pacienteSalvo);
+		return ResponseEntity.status(HttpStatus.CREATED).body(pacienteDTOSalvo);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Paciente>> listar(){
+	public ResponseEntity<List<PacienteDTO>> listar(){
 		List<Paciente> pacientes = ps.listar();
-		return ResponseEntity.status(HttpStatus.OK).body(pacientes);
+		List<PacienteDTO> pacienteSalvo = PacienteMapper.toPacienteList(pacientes);
+		return ResponseEntity.status(HttpStatus.OK).body(pacienteSalvo);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Paciente> exibir(@PathVariable Long id){
-		Optional<Paciente> optPaciente = ps.exibir(id);
+	@GetMapping("/{cpf}")
+	public ResponseEntity<PacienteDTO> exibir(@PathVariable String cpf){	
+		Optional<Paciente> optPaciente = ps.exibir(cpf);
 		if(optPaciente.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(optPaciente.get());
+		return ResponseEntity.status(HttpStatus.OK).body(PacienteMapper.toPacienteDTO(optPaciente.get()));
 	}
 	
 	@PutMapping

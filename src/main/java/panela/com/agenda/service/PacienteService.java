@@ -34,8 +34,8 @@ public class PacienteService {
 		return pr.findAll();
 	}
 	
-	public Optional<Paciente> exibir(Long id) {
-		return pr.findById(id);
+	public Optional<Paciente> exibir(String cpf) {
+		return pr.findByCpf(cpf);
 	}
 	
 	public Paciente alterar(Paciente paciente) {

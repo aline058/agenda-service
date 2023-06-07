@@ -1,28 +1,12 @@
-package panela.com.agenda.entity;
+package panela.com.agenda.DTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "paciente")
-public class Paciente {
+public class PacienteDTO {
 		
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
 	String nome;
 	String sobrenome;
 	String email;
 	String cpf;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -47,17 +31,18 @@ public class Paciente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Paciente(Long id, String nome, String sobrenome, String email, String cpf) {
+	public PacienteDTO(String nome, String sobrenome, String email, String cpf) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
 		this.cpf = cpf;
 	}
-	public Paciente() {
+	public PacienteDTO() {
 		super();
 	}
+	
+	
 	
 	
 }
