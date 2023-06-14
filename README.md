@@ -15,10 +15,7 @@ A aplicação consiste em uma agenda onde é possível agendar dia e horário pa
 - Maven
 
 ## Implantação em produção
-- Back end: Heroku
-- Front end web: Netlify
-- Banco de dados: H2
-
+editar
 # Como executar o projeto
 
 ## Back end
